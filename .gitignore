@@ -1,4 +1,4 @@
 .httr-oauth
 key/*
 *.Rproj
-.Rproj*
+.Rproj.user/*

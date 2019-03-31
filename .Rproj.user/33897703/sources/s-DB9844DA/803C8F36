@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1554002274125.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1408437684",
+    "hash" : "0",
     "id" : "803C8F36",
     "lastKnownWriteTime" : 1554003146,
-    "last_content_update" : 1554003146941,
+    "last_content_update" : 1554004259633,
     "path" : "~/coding/spotify/main.R",
     "project_path" : "main.R",
     "properties" : {
-        "cursorPosition" : "88,0",
-        "scrollLine" : "83"
+        "cursorPosition" : "133,0",
+        "scrollLine" : "107"
     },
     "relative_order" : 1,
     "source_on_save" : false,

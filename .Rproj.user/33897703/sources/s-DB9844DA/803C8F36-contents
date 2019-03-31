@@ -2,13 +2,15 @@ rm(list=ls())
 gc()
 dev.off()
 
-library(devtools)
-install_github("tiagomendesdantas/Rspotify")
+#install.packages("igraph")
 
+library(devtools)
 library(Rspotify)
 library(magrittr)
 library(stringr)
 library(tidyverse)
+library(igraph)
+library(visNetwork) 
 
 app_name      = "FeatGraph"
 client_id     = readRDS("key/client_id.rds")
@@ -52,7 +54,7 @@ id_links = function(artist){
   
   id_album = c(id_album,id_single)
   
-  id_album
+  #id_album
   
   id_track = lapply(id_album,function(x) as.character(getAlbum(x,token=keys)$id) ) 
   
@@ -86,21 +88,18 @@ id_links_by_list = function(list_art){
 
 #######
 
-df4net = id_links_by_list(c("rancid","nofx"))
+df4net = id_links_by_list(c("belchior","zé ramalho"))
 
 
 id_link_df = Reduce(rbind,df4net)
 id_link_df_unique = id_link_df %>% unique
 
-library(igraph)
+# igraph
 
-#net = graph_from_data_frame(id_link_df, directed=F)
 net = graph_from_data_frame(id_link_df_unique, directed=F)
 
-net.bg=net
-l <- layout_with_kk(net.bg)
-#l = layout_with_mds
-plot(net.bg
+l <- layout_with_kk(net)
+plot(net
      , layout=l
      , vertex.size=5
      , edge.color="gray80"
@@ -109,12 +108,11 @@ plot(net.bg
      , vertex.frame.color="lightgreen"
      , vertex.label.font=1
      , vertex.label.cex=1.5
-     ,vertex.label=NA
+     , vertex.label=NA
      , interactive = T
      )
 
-#install.packages("visNetwork")
-library("visNetwork") 
+# visNetwork
 
 nodes <- as_data_frame(net, what="vertices")
 nodes$id = row.names(nodes)
@@ -124,7 +122,7 @@ vis.nodes <- nodes
 vis.links <- edges
 vis.nodes$title  <- nodes$id # Text on click
 vis.nodes$label  <- NA # Node label
-vis.nodes$size   <- 40 # Node size
+vis.nodes$size   <- 10 # Node size
 
 vis.nodes$color.highlight.background <- "orange"
 vis.nodes$color.highlight.border <- "darkred"
@@ -132,5 +130,6 @@ vis.nodes$color.highlight.border <- "darkred"
 dev.off()
 gc()
 visnet = visNetwork(vis.nodes, vis.links, width="100%", height="600px", highlightNearest = TRUE) 
+visnet
 visSave(visnet, "teste.html", selfcontained = TRUE, background = "white")
 
