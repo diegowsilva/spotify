@@ -1,3 +1,4 @@
 .httr-oauth
 key/*
 *.Rproj
+.Rproj*
