@@ -131,5 +131,5 @@ dev.off()
 gc()
 visnet = visNetwork(vis.nodes, vis.links, width="100%", height="600px", highlightNearest = TRUE) 
 visnet
-visSave(visnet, "teste.html", selfcontained = TRUE, background = "white")
+visSave(visnet, "output.html", selfcontained = TRUE, background = "white")
 
